@@ -1,4 +1,4 @@
-import { Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { Image } from 'expo-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -30,7 +30,19 @@ function getInteriorFormulario() {
     console.log('El botón ha sido pulsado')
   }
   function fabPulsado() {
-    console.log('El FAB ha sido pulsado')
+    const mensaje = "Has pulsado el floating action button para compartir los datos del formulario. ¿Deseas continuar?"
+    if(Platform.OS === 'web') {
+      window.alert(mensaje)
+    } else {
+      Alert.alert(
+        "FAB Pulsado!",
+        mensaje,
+        [
+          {text: "Cancelar", onPress: () => console.log("Cancelar pulsado")},
+          {text: "Aceptar", onPress: () => console.log("Aceptar pulsado")}
+        ]
+      )
+    }
   }
   return (
     <>
