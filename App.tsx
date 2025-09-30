@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { Image } from 'expo-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -6,6 +6,9 @@ import { Picker } from '@react-native-picker/picker'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
 
 export default function App() {
+  function botonPulsado() {
+    console.log('El botón ha sido pulsado')
+  }
   return (
     <SafeAreaView edges={['top', 'bottom']}>
     <View style={styles.contenedorPrincipal}>
@@ -72,6 +75,12 @@ export default function App() {
           text={'He leído y acepto los términos'}
           textStyle={{textDecorationLine: 'none'}}
         />
+        <Pressable
+          onPress={botonPulsado}
+          style={ ({pressed}) => pressed? styles.botonPulsado: styles.boton }
+        >
+          <Text style={styles.textoBoton}>Registrar</Text>
+        </Pressable>
       </View>
     </View>
     </SafeAreaView>
@@ -119,5 +128,31 @@ const styles = StyleSheet.create({
   parrafo: {
     color: '#8c8c8c',
     marginVertical: 16
+  },
+  boton: {
+    marginTop: 24,
+    paddingVertical: 16,
+    width: 150,
+    height: 'auto',
+    backgroundColor: '#e45151ff',
+    borderRadius: 25
+  },
+  textoBoton: {
+    color: 'white',
+    fontWeight: 'bold',
+    margin: 'auto'
+  },
+  botonPulsado: {
+    marginTop: 24,
+    paddingVertical: 16,
+    width: 150,
+    backgroundColor: '#c13b3b',
+    borderRadius: 25,
+    transform: [{ scale: 0.97 }],
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
   }
 })
