@@ -4,10 +4,14 @@ import { Image } from 'expo-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Picker } from '@react-native-picker/picker'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
+import {MaterialIcons} from "@expo/vector-icons"
 
 export default function App() {
   function botonPulsado() {
     console.log('El botón ha sido pulsado')
+  }
+  function fabPulsado() {
+    console.log('El FAB ha sido pulsado')
   }
   return (
     <SafeAreaView edges={['top', 'bottom']}>
@@ -83,6 +87,12 @@ export default function App() {
         </Pressable>
       </View>
     </ScrollView>
+    <Pressable
+      style={({pressed}) => pressed? styles.fabPulsado: styles.fab}
+      onPress={fabPulsado}
+    >
+      <MaterialIcons name="share" style={styles.textoFab} />
+    </Pressable>
     </SafeAreaView>
   )
 }
@@ -155,5 +165,47 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 40,
+    right: 30,
+    backgroundColor: 'orange',
+    borderRadius: '50%',
+    width: 56,
+    height: 56,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7
+  },
+  fabPulsado: {
+    position: 'absolute',
+    bottom: 40,
+    right: 30,
+    backgroundColor: '#cc7000',
+    borderRadius: 28,
+    width: 56,
+    height: 56,
+    justifyContent: 'center',
+    alignItems: 'center',
+    transform: [{ scale: 0.94 }],
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 4
+  },
+  textoFab: {
+    margin: 'auto',
+    fontSize: 24,
+    color: 'white'
   }
 })
