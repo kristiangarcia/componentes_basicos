@@ -2,6 +2,8 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { Image } from 'expo-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Picker } from '@react-native-picker/picker'
+import BouncyCheckbox from 'react-native-bouncy-checkbox'
 
 export default function App() {
   return (
@@ -47,6 +49,29 @@ export default function App() {
           numberOfLines={5}
           style={styles.cuadroTexto}
         />
+        <View style={styles.desplegable}>
+          <Picker style={styles.picker} >
+            <Picker.Item label="-- Nivel de estudios --" value="ne" />
+            <Picker.Item label="Secundaria" value="eso" />
+            <Picker.Item label="Bachillerato" value="bh" />
+            <Picker.Item label="Ciclo de FP" value="fp" />
+            <Picker.Item label="Universidad" value="uni" />
+            <Picker.Item label="Sin estudios" value="nada" />
+          </Picker>
+        </View>
+        <Text style={styles.parrafo}>
+          Pulsando el siguiente botón, el usuario se hace responsable
+          de hacer un uso correcto del portal, sin subir contenidos
+          que supongan un incumplimiento de las leyes de protección
+          de datos ni de la propiedad intelectual.
+        </Text>
+        <BouncyCheckbox
+          size={16}
+          fillColor={'red'}
+          unFillColor={'white'}
+          text={'He leído y acepto los términos'}
+          textStyle={{textDecorationLine: 'none'}}
+        />
       </View>
     </View>
     </SafeAreaView>
@@ -80,5 +105,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 'auto',
     marginBottom: 16
+  },
+  picker: {
+    color: '#8c8c8c'
+  },
+  desplegable: {
+    borderStyle: 'solid',
+    borderColor: '#e7e5e5ff',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginTop: 10
+  },
+  parrafo: {
+    color: '#8c8c8c',
+    marginVertical: 16
   }
 })
