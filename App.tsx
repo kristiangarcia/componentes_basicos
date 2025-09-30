@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { Image } from 'expo-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -11,7 +11,7 @@ export default function App() {
   }
   return (
     <SafeAreaView edges={['top', 'bottom']}>
-    <View style={styles.contenedorPrincipal}>
+    <ScrollView style={styles.contenedorPrincipal}>
       <Image
         source={require("./assets/registrar.jpg")}
         contentFit='fill'
@@ -82,7 +82,7 @@ export default function App() {
           <Text style={styles.textoBoton}>Registrar</Text>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
     </SafeAreaView>
   )
 }
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'white',
     marginTop: 16,
+    marginBottom: 64,
     marginHorizontal: 16,
     width: 'auto',
     height: 'auto'
