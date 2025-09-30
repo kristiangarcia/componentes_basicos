@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { Image } from 'expo-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -17,7 +17,7 @@ export default function App() {
         contentFit='fill'
         style={styles.logo}
         />
-      <View style={styles.contenedorSecundario}>
+      <ScrollView style={styles.contenedorSecundario}>
         <TextInput
           placeholder={'Nombre'}
           maxLength={100}
@@ -81,7 +81,12 @@ export default function App() {
         >
           <Text style={styles.textoBoton}>Registrar</Text>
         </Pressable>
-      </View>
+        <Text style={styles.parrafo}>
+          Esta app ha sido desarrollada para el módulo
+          de desarrollo de dispossitivos móviles de 2º dam
+          del IES HLanz de Granada.
+        </Text>
+      </ScrollView>
     </View>
     </SafeAreaView>
   )
