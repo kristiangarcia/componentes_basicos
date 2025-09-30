@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { Image } from 'expo-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -17,71 +17,73 @@ export default function App() {
         contentFit='fill'
         style={styles.logo}
         />
-      <View style={styles.contenedorSecundario}>
-        <TextInput
-          placeholder={'Nombre'}
-          maxLength={100}
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Apellidos'}
-          maxLength={100}
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Teléfono'}
-          maxLength={9}
-          keyboardType='numeric'
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Correo electrónico'}
-          keyboardType='email-address'
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Contraseña'}
-          maxLength={12}
-          secureTextEntry={true}
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Observaciones'}
-          maxLength={100}
-          multiline={true}
-          numberOfLines={5}
-          style={styles.cuadroTexto}
-        />
-        <View style={styles.desplegable}>
-          <Picker style={styles.picker} >
-            <Picker.Item label="-- Nivel de estudios --" value="ne" />
-            <Picker.Item label="Secundaria" value="eso" />
-            <Picker.Item label="Bachillerato" value="bh" />
-            <Picker.Item label="Ciclo de FP" value="fp" />
-            <Picker.Item label="Universidad" value="uni" />
-            <Picker.Item label="Sin estudios" value="nada" />
-          </Picker>
+      <ScrollView>
+        <View style={styles.contenedorSecundario}>
+          <TextInput
+            placeholder={'Nombre'}
+            maxLength={100}
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Apellidos'}
+            maxLength={100}
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Teléfono'}
+            maxLength={9}
+            keyboardType='numeric'
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Correo electrónico'}
+            keyboardType='email-address'
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Contraseña'}
+            maxLength={12}
+            secureTextEntry={true}
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Observaciones'}
+            maxLength={100}
+            multiline={true}
+            numberOfLines={5}
+            style={styles.cuadroTexto}
+          />
+          <View style={styles.desplegable}>
+            <Picker style={styles.picker} >
+              <Picker.Item label="-- Nivel de estudios --" value="ne" />
+              <Picker.Item label="Secundaria" value="eso" />
+              <Picker.Item label="Bachillerato" value="bh" />
+              <Picker.Item label="Ciclo de FP" value="fp" />
+              <Picker.Item label="Universidad" value="uni" />
+              <Picker.Item label="Sin estudios" value="nada" />
+            </Picker>
+          </View>
+          <Text style={styles.parrafo}>
+            Pulsando el siguiente botón, el usuario se hace responsable
+            de hacer un uso correcto del portal, sin subir contenidos
+            que supongan un incumplimiento de las leyes de protección
+            de datos ni de la propiedad intelectual.
+          </Text>
+          <BouncyCheckbox
+            size={16}
+            fillColor={'red'}
+            unFillColor={'white'}
+            text={'He leído y acepto los términos'}
+            textStyle={{textDecorationLine: 'none'}}
+          />
+          <Pressable
+            onPress={botonPulsado}
+            style={ ({pressed}) => pressed? styles.botonPulsado: styles.boton }
+          >
+            <Text style={styles.textoBoton}>Registrar</Text>
+          </Pressable>
         </View>
-        <Text style={styles.parrafo}>
-          Pulsando el siguiente botón, el usuario se hace responsable
-          de hacer un uso correcto del portal, sin subir contenidos
-          que supongan un incumplimiento de las leyes de protección
-          de datos ni de la propiedad intelectual.
-        </Text>
-        <BouncyCheckbox
-          size={16}
-          fillColor={'red'}
-          unFillColor={'white'}
-          text={'He leído y acepto los términos'}
-          textStyle={{textDecorationLine: 'none'}}
-        />
-        <Pressable
-          onPress={botonPulsado}
-          style={ ({pressed}) => pressed? styles.botonPulsado: styles.boton }
-        >
-          <Text style={styles.textoBoton}>Registrar</Text>
-        </Pressable>
-      </View>
+      </ScrollView>
     </View>
     </SafeAreaView>
   )
@@ -97,6 +99,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'white',
     marginTop: 16,
+    marginBottom: 64,
     marginHorizontal: 16,
     width: 'auto',
     height: 'auto'
