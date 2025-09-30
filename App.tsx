@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
 import { Image } from 'expo-image'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -7,6 +7,25 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox'
 import {MaterialIcons} from "@expo/vector-icons"
 
 export default function App() {
+  return (
+    <>
+    {
+      Platform.OS === 'web'?
+      (
+        <View>
+          {getInteriorFormulario()}
+        </View>
+      ):
+      (
+        <SafeAreaView edges={['top', 'bottom']}>
+          {getInteriorFormulario()}
+        </SafeAreaView>
+      )
+    }
+    </>
+  )
+}
+function getInteriorFormulario() {
   function botonPulsado() {
     console.log('El botón ha sido pulsado')
   }
@@ -14,89 +33,92 @@ export default function App() {
     console.log('El FAB ha sido pulsado')
   }
   return (
-    <SafeAreaView edges={['top', 'bottom']}>
-    <ScrollView style={styles.contenedorPrincipal}>
-      <Image
-        source={require("./assets/registrar.jpg")}
-        contentFit='fill'
-        style={styles.logo}
-        />
-      <View style={styles.contenedorSecundario}>
-        <TextInput
-          placeholder={'Nombre'}
-          maxLength={100}
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Apellidos'}
-          maxLength={100}
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Teléfono'}
-          maxLength={9}
-          keyboardType='numeric'
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Correo electrónico'}
-          keyboardType='email-address'
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Contraseña'}
-          maxLength={12}
-          secureTextEntry={true}
-          style={styles.cuadroTexto}
-        />
-        <TextInput
-          placeholder={'Observaciones'}
-          maxLength={100}
-          multiline={true}
-          numberOfLines={5}
-          style={styles.cuadroTexto}
-        />
-        <View style={styles.desplegable}>
-          <Picker style={styles.picker} >
-            <Picker.Item label="-- Nivel de estudios --" value="ne" />
-            <Picker.Item label="Secundaria" value="eso" />
-            <Picker.Item label="Bachillerato" value="bh" />
-            <Picker.Item label="Ciclo de FP" value="fp" />
-            <Picker.Item label="Universidad" value="uni" />
-            <Picker.Item label="Sin estudios" value="nada" />
-          </Picker>
+    <>
+      <ScrollView style={styles.contenedorPrincipal}>
+        <Image
+          source={require("./assets/registrar.jpg")}
+          contentFit={Platform.OS === 'web'? 'fill':'cover'}
+          style={styles.logo}
+          />
+        <View style={styles.contenedorSecundario}>
+          <TextInput
+            placeholder={'Nombre'}
+            maxLength={100}
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Apellidos'}
+            maxLength={100}
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Teléfono'}
+            maxLength={9}
+            keyboardType='numeric'
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Correo electrónico'}
+            keyboardType='email-address'
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Contraseña'}
+            maxLength={12}
+            secureTextEntry={true}
+            style={styles.cuadroTexto}
+          />
+          <TextInput
+            placeholder={'Observaciones'}
+            maxLength={100}
+            multiline={true}
+            numberOfLines={5}
+            style={styles.cuadroTexto}
+          />
+          <View style={styles.desplegable}>
+            <Picker style={styles.picker} >
+              <Picker.Item label="-- Nivel de estudios --" value="ne" />
+              <Picker.Item label="Secundaria" value="eso" />
+              <Picker.Item label="Bachillerato" value="bh" />
+              <Picker.Item label="Ciclo de FP" value="fp" />
+              <Picker.Item label="Universidad" value="uni" />
+              <Picker.Item label="Sin estudios" value="nada" />
+            </Picker>
+          </View>
+          <Text style={styles.parrafo}>
+            Pulsando el siguiente botón, el usuario se hace responsable
+            de hacer un uso correcto del portal, sin subir contenidos
+            que supongan un incumplimiento de las leyes de protección
+            de datos ni de la propiedad intelectual.
+          </Text>
+          <BouncyCheckbox
+            size={16}
+            fillColor={'red'}
+            unFillColor={'white'}
+            text={'He leído y acepto los términos'}
+            textStyle={{textDecorationLine: 'none'}}
+          />
+          <Pressable
+            onPress={botonPulsado}
+            style={ ({pressed}) => pressed? styles.botonPulsado: styles.boton }
+          >
+            <Text style={styles.textoBoton}>Registrar</Text>
+          </Pressable>
+          <Text style={styles.parrafo}>
+            {Platform.OS === 'web'?'Esta web':'Esta app'} ha sido desarrollada para el
+            módulo de desarrollo de dispositivos móviles de 2º dam del IES HLanz de Granada.
+          </Text>
         </View>
-        <Text style={styles.parrafo}>
-          Pulsando el siguiente botón, el usuario se hace responsable
-          de hacer un uso correcto del portal, sin subir contenidos
-          que supongan un incumplimiento de las leyes de protección
-          de datos ni de la propiedad intelectual.
-        </Text>
-        <BouncyCheckbox
-          size={16}
-          fillColor={'red'}
-          unFillColor={'white'}
-          text={'He leído y acepto los términos'}
-          textStyle={{textDecorationLine: 'none'}}
-        />
-        <Pressable
-          onPress={botonPulsado}
-          style={ ({pressed}) => pressed? styles.botonPulsado: styles.boton }
-        >
-          <Text style={styles.textoBoton}>Registrar</Text>
-        </Pressable>
-      </View>
-    </ScrollView>
-    <Pressable
-      style={({pressed}) => pressed? styles.fabPulsado: styles.fab}
-      onPress={fabPulsado}
-    >
-      <MaterialIcons name="share" style={styles.textoFab} />
-    </Pressable>
-    </SafeAreaView>
+      </ScrollView>
+      <Pressable
+        style={({pressed}) => pressed? styles.fabPulsado: styles.fab}
+        onPress={fabPulsado}
+      >
+        <MaterialIcons name="share" style={styles.textoFab} />
+      </Pressable>
+    </>
   )
 }
-
 const styles = StyleSheet.create({
   contenedorPrincipal: {
     backgroundColor: '#f5f3f3ff',
@@ -114,7 +136,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: '100%',
-    height: 160,
+    height: Platform.OS === 'web'? 360: 160
   },
   cuadroTexto: {
     paddingVertical: 10,
