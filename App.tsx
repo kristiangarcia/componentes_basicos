@@ -12,6 +12,8 @@ export default function App() {
         contentFit='fill'
         style={styles.logo}
         />
+      <View style={styles.contenedorSecundario}>
+      </View>
     </View>
     </SafeAreaView>
   )
@@ -22,6 +24,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f3f3ff',
     width: '100%',
     height: '100%'
+  },
+  contenedorSecundario: {
+    padding: 20,
+    backgroundColor: 'white',
+    marginTop: 16,
+    marginHorizontal: 16,
+    width: 'auto',
+    height: 'auto'
   },
   logo: {
     width: '100%',
